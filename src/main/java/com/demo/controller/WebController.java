@@ -10,4 +10,9 @@ public class WebController {
     public String home() {
         return "index";  // This should correspond to index.html in templates folder
     }
+
+    @GetMapping("/car-details.html")
+    public String getCarDetailsPage() {
+        return "carDetails"; // Ensure car-details.html is located in src/main/resources/templates/
+    }
 }

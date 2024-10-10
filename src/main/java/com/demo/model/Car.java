@@ -3,12 +3,14 @@ package com.demo.model;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Car {
 
     @Id
@@ -50,4 +52,5 @@ public class Car {
 
     @Embedded
     private CarImage images;
+
 }

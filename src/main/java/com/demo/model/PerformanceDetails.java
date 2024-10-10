@@ -14,3 +14,4 @@ public class PerformanceDetails {
     private double topSpeed;  // In km/h or mph
     private double zeroToHundredTime;  // 0-100 km/h time in seconds
 }
+

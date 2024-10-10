@@ -48,27 +48,69 @@ function fetchCarSuggestions() {
         fetch(`/api/cars/search?brand=${brand}`)
             .then(response => response.json())
             .then(data => {
+                console.log("Data from API:", data); // Log the entire response to verify structure
+
+                // If you're expecting an array of cars with 'brand' and 'model' properties:
+                if (!Array.isArray(data)) {
+                    console.error("API response is not an array");
+                    return;
+                }
+
+                // Optional: Filter unique data if needed (you can skip this if no duplicates)
+                const uniqueData = data.filter((car, index, self) =>
+                    index === self.findIndex(c => c.id === car.id)
+                );
+                console.log("Unique Data:", uniqueData); // Log the filtered data
+
                 let suggestions = document.getElementById("suggestions");
                 suggestions.innerHTML = ""; // Clear previous suggestions
 
-                data.forEach(car => {
-                    let div = document.createElement("div");
-                    div.textContent = car;
-                    div.classList.add("suggestion-item");
-                    div.onclick = () => selectCar(car);
-                    suggestions.appendChild(div);
+                uniqueData.forEach(car => {
+                    if (car.brand && car.model && car.id) { // Ensure car object has required fields
+                        let div = document.createElement("div");
+                        console.log("car:", car.brand); // Log the filtered data
+
+                        // Display both brand and model properly
+                        div.textContent = `${car.brand}`;
+
+                        div.classList.add("suggestion-item");
+                        div.setAttribute("data-id", car.id); // Store the car ID as a data attribute
+                        div.onclick = () => selectCar(car.id); // Pass the car ID to selectCar
+                        suggestions.appendChild(div);
+                    } else {
+                        console.warn("Car object missing required fields:", car);
+                    }
                 });
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => console.error('Error fetching data:', error));
     } else {
         document.getElementById("suggestions").innerHTML = ""; // Clear suggestions if less than 3 chars
     }
 }
 
+
 // Add event listener to call suggestions when user types
 document.getElementById('carSearch').addEventListener('input', fetchCarSuggestions);
 
-function selectCar(car) {
-    document.getElementById("carSearch").value = car;
-    document.getElementById("suggestions").innerHTML = ""; // Clear suggestions once selected
+//function selectCar(car) {
+//    document.getElementById("carSearch").value = car;
+//    document.getElementById("suggestions").innerHTML = ""; // Clear suggestions once selected
+//}
+
+// Function to select a car from suggestions
+function selectCar(carId) {
+    selectedCarId = carId; // Store the selected car ID
+    const car = document.querySelector(`.suggestion-item[data-id="${carId}"]`);
+    document.getElementById("carSearch").value = car.textContent; // Set the input field
+    document.getElementById("suggestions").innerHTML = ""; // Clear suggestions
+    document.getElementById("viewDetailsButton").disabled = false; // Enable the "View Details" button
 }
+
+// Function to redirect to car details page
+function redirectToCarDetails() {
+    if (selectedCarId) {
+        window.location.href = `/car-details.html?id=${selectedCarId}`; // Redirect to car details page with car ID
+        console.log("window.location.href : "+ window.location.href);
+    }
+
+   }
