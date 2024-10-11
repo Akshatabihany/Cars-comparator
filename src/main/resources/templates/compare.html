@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Cars</title>
+    <style>
+        .car-comparison-container {
+    display: flex;
+    justify-content: space-between; /* Spreads the columns evenly */
+    gap: 20px; /* Adds some space between the car detail columns */
+}
+
+.car-details {
+    flex: 1; /* Each car detail takes up equal space */
+    border: 1px solid #ccc;
+    padding: 15px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Optional: for a subtle shadow effect */
+    background-color: #f9f9f9;
+}
+
+    </style>
+</head>
+<body>
+<h1>Compare Cars</h1>
+<div id="carComparisonContainer" class="car-comparison-container">
+    <div id="currentCarDetails" class="car-details"></div>
+    <div id="car1Details" class="car-details"></div>
+    <div id="car2Details" class="car-details"></div>
+</div>
+<script src="/js/compare.js"></script>
+</body>
+</html>

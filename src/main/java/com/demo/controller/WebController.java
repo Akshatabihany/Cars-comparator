@@ -15,4 +15,9 @@ public class WebController {
     public String getCarDetailsPage() {
         return "carDetails"; // Ensure car-details.html is located in src/main/resources/templates/
     }
+
+    @GetMapping("/compare.html")
+    public String getComparePage() {
+        return "compare"; // Ensure car-details.html is located in src/main/resources/templates/
+    }
 }
