@@ -166,7 +166,6 @@ async function fetchSimilarCars(carId) {
 
 // Function to display similar cars
 function displaySimilarCars(cars) {
-    console.log("inside displaySimilarCars")
     const similarCarsList = document.getElementById('similarCarsList');
     similarCarsList.innerHTML = ''; // Clear previous content
 
@@ -202,7 +201,6 @@ function displaySimilarCars(cars) {
 }
 
 function compareCars() {
-    console.log("compare cars function")
     if (selectedCars.size === 2) {
         const carIds = Array.from(selectedCars);
         const currentCarId = getUrlParameter('id'); // Assuming the current car ID is available as a URL parameter

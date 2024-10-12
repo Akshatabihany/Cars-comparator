@@ -1,5 +1,3 @@
-// scripts.js
-
 // Function to search for cars based on user input
 async function searchCar() {
     const query = document.getElementById('carSearch').value;
@@ -88,14 +86,8 @@ function fetchCarSuggestions() {
     }
 }
 
-
 // Add event listener to call suggestions when user types
 document.getElementById('carSearch').addEventListener('input', fetchCarSuggestions);
-
-//function selectCar(car) {
-//    document.getElementById("carSearch").value = car;
-//    document.getElementById("suggestions").innerHTML = ""; // Clear suggestions once selected
-//}
 
 // Function to select a car from suggestions
 function selectCar(carId) {

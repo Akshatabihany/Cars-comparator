@@ -2,7 +2,6 @@ package com.demo.controller;
 
 import com.demo.model.Car;
 import com.demo.response.CarDTO;
-import com.demo.response.CarDetailsByIdResponse;
 import com.demo.service.CarService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +28,6 @@ public class CarController {
     public List<Car> getAllCars() {
         return carService.getAllCars();
     }
-
-//    @GetMapping("/search")
-//    public ResponseEntity<List<String>> searchCars(@RequestParam("brand") String brand) {
-//        List<String> carNames = carService.searchCarNames(brand);
-//        return new ResponseEntity<>(carNames, HttpStatus.OK);
-//    }
 
     @GetMapping("/search")
     public ResponseEntity<List<CarDTO>> searchCars(@RequestParam String brand) {
