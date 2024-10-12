@@ -152,10 +152,11 @@ function generateListHTML(items, itemName) {
 async function fetchSimilarCars(carId) {
     console.log("Inside fetchSimilarCars, Car ID:", carId); // Check if this function is called
     try {
-        const response = await fetch(`/api/cars/${carId}/similar`); // API call to get similar cars
+        const response = await fetch(`/api/cars/similar/${carId}`); // API call to get similar cars
         if (!response.ok) {
             throw new Error('Could not fetch similar cars');
         }
+        console.log("similar cars :" + response);
         const similarCars = await response.json();
         console.log("Fetched Similar Cars:", similarCars); // Log similar cars data
         displaySimilarCars(similarCars);

@@ -47,9 +47,14 @@ log.info("carDTOOptional reponse : "+ carDTOOptional);
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/{id}/similar")
-    public List<Car> getSimilarCars(@PathVariable Long id) {
-        log.info("get similar caars controller:" +id );
-        return carService.findSimilarCars(id);
+    @GetMapping("/similar/{id}")
+    public ResponseEntity<List<Car>> getSimilarCars(@PathVariable int id) {
+        return ResponseEntity.ok(carService.findSimilarCars(id));
     }
+
+//    @GetMapping("/{id}/similar")
+//    public List<Car> getSimilarCars(@PathVariable Long id) {
+//        log.info("get similar caars controller:" +id );
+//        return carService.findSimilarCars(id);
+//    }
 }
