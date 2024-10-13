@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-
 public class Dimensions {
-    private double length;  // In mm
-    private double width;   // In mm
-    private double height;  // In mm
+    private double length;
+    private double width;
+    private double height;
 }

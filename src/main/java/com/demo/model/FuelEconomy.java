@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-
 public class FuelEconomy {
     private double cityMileage;  // In km/l or mpg
     private double highwayMileage;  // In km/l or mpg

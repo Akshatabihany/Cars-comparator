@@ -11,8 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-
 public class SafetyFeatures {
-    private List<String> safetyFeatures;  // List of safety features
+    private List<String> safetyFeatures;
     private int airbagsCount;
 }

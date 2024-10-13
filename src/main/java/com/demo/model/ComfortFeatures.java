@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-
 public class ComfortFeatures {
     private boolean hasSunroof;
     private boolean hasHeatedSeats;

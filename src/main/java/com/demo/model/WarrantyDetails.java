@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-
 public class WarrantyDetails {
     private int warrantyYears;
-    private int warrantyKilometers;  // Warranty in kilometers
+    private int warrantyKilometers;
 }
 

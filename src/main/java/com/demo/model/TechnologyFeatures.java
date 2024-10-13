@@ -11,7 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-
 public class TechnologyFeatures {
-    private List<String> techFeatures;  // List of tech features
+    private List<String> techFeatures;
 }

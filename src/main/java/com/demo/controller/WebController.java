@@ -6,18 +6,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class WebController {
 
-    @GetMapping("/")  // Maps the root URL to this method
+    @GetMapping("/")
     public String home() {
-        return "index";  // This should correspond to index.html in templates folder
+        return "index";
     }
 
     @GetMapping("/car-details.html")
     public String getCarDetailsPage() {
-        return "carDetails"; // Ensure car-details.html is located in src/main/resources/templates/
+        return "carDetails";
     }
 
     @GetMapping("/compare.html")
     public String getComparePage() {
-        return "compare"; // Ensure car-details.html is located in src/main/resources/templates/
+        return "compare"; 
     }
 }

@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CarDTO {
-    private Long id; // Assuming you have a Long ID for your car
+    private Long id;
     private String brand;
-    private String model; // Include any other fields you need
-
-    // Getters and Setters
+    private String model;
 }

@@ -32,7 +32,6 @@ public class CarController {
     @GetMapping("/search")
     public ResponseEntity<List<CarDTO>> searchCars(@RequestParam String brand) {
         List<CarDTO> cars = carService.findCarsByBrand(brand);
-        log.info("carscarscars : "+ cars);
         return ResponseEntity.ok(cars);
     }
 
@@ -40,9 +39,7 @@ public class CarController {
     // API to fetch car details by ID
     @GetMapping("/{carId}")
     public ResponseEntity<Car> getCarById(@PathVariable Long carId) {
-        log.info("carID from controller" + carId);
         Optional<Car> carDTOOptional = carService.getCarById(carId);
-log.info("carDTOOptional reponse : "+ carDTOOptional);
         return carDTOOptional.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -51,10 +48,4 @@ log.info("carDTOOptional reponse : "+ carDTOOptional);
     public ResponseEntity<List<Car>> getSimilarCars(@PathVariable int id) {
         return ResponseEntity.ok(carService.findSimilarCars(id));
     }
-
-//    @GetMapping("/{id}/similar")
-//    public List<Car> getSimilarCars(@PathVariable Long id) {
-//        log.info("get similar caars controller:" +id );
-//        return carService.findSimilarCars(id);
-//    }
 }
