@@ -3,6 +3,7 @@ package com.demo.service;
 import com.demo.controller.CarController;
 import com.demo.model.Car;
 import com.demo.repository.CarRepository;
+import com.demo.response.AddCarResponse;
 import com.demo.response.CarDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,54 +29,68 @@ public class CarService {
     }
 
 
-    public Car saveCar(Car car) {
-        return carRepository.save(car);
+    public AddCarResponse saveCar(Car car) {
+        try {
+            carRepository.save(car);
+            return AddCarResponse.builder()
+                    .success(true)
+                    .message("Added car details to DB.")
+                    .build();
+        } catch (Exception e) {
+            String errorMessage = String.format("Failed to add car details to DB of car Id: %d, exception occurred: %s", car.getId(), e);
+            log.info(errorMessage);
+            return AddCarResponse.builder()
+                    .success(false)
+                    .message(errorMessage)
+                    .build();
+        }
     }
 
     public List<Car> getAllCars() {
-        return carRepository.findAll();
+        try {
+            List<Car> getCarsResponse = carRepository.findAll();
+            return getCarsResponse;
+        } catch (Exception e) {
+            String errorMessage = String.format("Failed to get all cars from DB, exception occurred: %s", e);
+            log.info(errorMessage);
+            return new ArrayList<>();
+        }
     }
 
     public List<CarDTO> findCarsByBrand(String brand) {
-        List<Car> cars = carRepository.findByBrandContainingIgnoreCase(brand);
-        return cars.stream()
-                .map(car -> new CarDTO(car.getId(), car.getBrand(), car.getModel()))
-                .collect(Collectors.toList());
+        try {
+            List<Car> cars = carRepository.findByBrandContainingIgnoreCase(brand);
+            return cars.stream()
+                    .map(car -> new CarDTO(car.getId(), car.getBrand(), car.getModel()))
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            String errorMessage = String.format("Failed to get cars by brand name, exception occurred: %s", e);
+            log.info(errorMessage);
+            return new ArrayList<>();
+        }
     }
 
     public Optional<Car> getCarById(Long carId) {
-        Optional<Car> carOptional = carRepository.findById(carId);
-        return carOptional;
+        try {
+            Optional<Car> car = carRepository.findById(carId);
+            return car;
+        } catch (Exception e) {
+            String errorMessage = String.format("Failed to get car by id, exception occurred: %s", e);
+            log.info(errorMessage);
+            return Optional.ofNullable(Car.builder().build());
+        }
     }
 
-//    public List<Car> findSimilarCars(Long carId) {
-//        Car selectedCar = carRepository.findById(carId).orElseThrow(() -> new RuntimeException("Car not found"));
-//
-//        String brand = selectedCar.getBrand();
-//        String bodyType = selectedCar.getBodyType();
-//        int minYear = selectedCar.getYear() - 1; // Allow one year difference
-//        int maxYear = selectedCar.getYear() + 1;
-//
-//        return carRepository.findSimilarCars(brand, bodyType, minYear, maxYear);
-//    }
-
     public List<Car> findSimilarCars(int targetCarId) {
-        log.info("targetCarId : " + targetCarId);
-
-        List<Car> allCars = carRepository.findAll();
-        log.info("allCars : " + allCars);
+        List<Car> allCars = getAllCars();
         List<Pair<Car, Double>> similarityScores = new ArrayList<>();
-
         Car targetCar = carRepository.getReferenceById((long) targetCarId);
-        log.info("targetCar : " + targetCar);
-
         double[] targetFeatureVector = createFeatureVector(targetCar);
 
         for (Car car : allCars) {
             if (!car.getId().equals(targetCar.getId())) {
                 double[] carFeatureVector = createFeatureVector(car);
                 double similarity = cosineSimilarity(targetFeatureVector, carFeatureVector);
-                //similarityScores.add(new Pair<>(car, similarity));
                 similarityScores.add(Pair.of(car, similarity));
             }
         }

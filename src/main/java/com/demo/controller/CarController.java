@@ -1,6 +1,7 @@
 package com.demo.controller;
 
 import com.demo.model.Car;
+import com.demo.response.AddCarResponse;
 import com.demo.response.CarDTO;
 import com.demo.service.CarService;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +21,7 @@ public class CarController {
     private CarService carService;
 
     @PostMapping
-    public Car addCar(@RequestBody Car car) {
+    public AddCarResponse addCar(@RequestBody Car car) {
         return carService.saveCar(car);
     }
 
@@ -29,11 +30,11 @@ public class CarController {
         return carService.getAllCars();
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<List<CarDTO>> searchCars(@RequestParam String brand) {
-        List<CarDTO> cars = carService.findCarsByBrand(brand);
-        return ResponseEntity.ok(cars);
-    }
+//    @GetMapping("/search")
+//    public ResponseEntity<List<CarDTO>> searchCars(@RequestParam String brand) {
+//        List<CarDTO> cars = carService.findCarsByBrand(brand);
+//        return ResponseEntity.ok(cars);
+//    }
 
 
     // API to fetch car details by ID
