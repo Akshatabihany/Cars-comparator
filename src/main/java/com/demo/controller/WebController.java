@@ -8,7 +8,7 @@ public class WebController {
 
     @GetMapping("/")
     public String home() {
-        return "index";
+        return "landingPage";
     }
 
     @GetMapping("/car-details.html")
