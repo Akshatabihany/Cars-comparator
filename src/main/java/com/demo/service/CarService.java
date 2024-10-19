@@ -1,10 +1,9 @@
 package com.demo.service;
 
-import com.demo.controller.CarController;
 import com.demo.model.Car;
 import com.demo.repository.CarRepository;
 import com.demo.response.AddCarResponse;
-import com.demo.response.CarDTO;
+import com.demo.response.GetCarByBrandResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
@@ -19,7 +18,7 @@ import java.util.stream.Collectors;
 @Service
 public class CarService {
 
-    private int NUMBER_OF_SIMILAR_CARS =10;
+    private static final int NUMBER_OF_SIMILAR_CARS = 10;
 
     @Autowired
     private final CarRepository carRepository;
@@ -27,7 +26,6 @@ public class CarService {
     public CarService(CarRepository carRepository) {
         this.carRepository = carRepository;
     }
-
 
     public AddCarResponse saveCar(Car car) {
         try {
@@ -57,11 +55,11 @@ public class CarService {
         }
     }
 
-    public List<CarDTO> findCarsByBrand(String brand) {
+    public List<GetCarByBrandResponse> findCarsByBrand(String brand) {
         try {
             List<Car> cars = carRepository.findByBrandContainingIgnoreCase(brand);
             return cars.stream()
-                    .map(car -> new CarDTO(car.getId(), car.getBrand(), car.getModel()))
+                    .map(car -> new GetCarByBrandResponse(car.getId(), car.getBrand(), car.getModel()))
                     .collect(Collectors.toList());
         } catch (Exception e) {
             String errorMessage = String.format("Failed to get cars by brand name, exception occurred: %s", e);
@@ -84,7 +82,14 @@ public class CarService {
     public List<Car> findSimilarCars(int targetCarId) {
         List<Car> allCars = getAllCars();
         List<Pair<Car, Double>> similarityScores = new ArrayList<>();
-        Car targetCar = carRepository.getReferenceById((long) targetCarId);
+        Car targetCar;
+        try {
+            targetCar = carRepository.getReferenceById((long) targetCarId);
+        } catch (Exception e) {
+            String errorMessage = String.format("Failed to get car by id, exception occurred: %s", e);
+            log.info(errorMessage);
+            return null;
+        }
         double[] targetFeatureVector = createFeatureVector(targetCar);
 
         for (Car car : allCars) {

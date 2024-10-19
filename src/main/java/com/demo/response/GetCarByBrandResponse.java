@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CarDTO {
+public class GetCarByBrandResponse {
     private Long id;
     private String brand;
     private String model;

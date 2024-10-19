@@ -2,7 +2,7 @@ package com.demo.controller;
 
 import com.demo.model.Car;
 import com.demo.response.AddCarResponse;
-import com.demo.response.CarDTO;
+import com.demo.response.GetCarByBrandResponse;
 import com.demo.service.CarService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +31,10 @@ public class CarController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<CarDTO>> searchCars(@RequestParam String brand) {
-        List<CarDTO> cars = carService.findCarsByBrand(brand);
+    public ResponseEntity<List<GetCarByBrandResponse>> getCarByBrand(@RequestParam String brand) {
+        List<GetCarByBrandResponse> cars = carService.findCarsByBrand(brand);
         return ResponseEntity.ok(cars);
     }
-
 
     @GetMapping("/{carId}")
     public ResponseEntity<Car> getCarById(@PathVariable Long carId) {
