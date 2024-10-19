@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Embeddable
 public class EngineDetails {
-
     private String engineType;
     private int horsepower;
     private int torque;

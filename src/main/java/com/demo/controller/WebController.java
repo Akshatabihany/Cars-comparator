@@ -18,6 +18,6 @@ public class WebController {
 
     @GetMapping("/compare.html")
     public String getComparePage() {
-        return "compare"; 
+        return "compare";
     }
 }
