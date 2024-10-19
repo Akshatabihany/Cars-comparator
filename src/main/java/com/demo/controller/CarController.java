@@ -30,11 +30,11 @@ public class CarController {
         return carService.getAllCars();
     }
 
-//    @GetMapping("/search")
-//    public ResponseEntity<List<CarDTO>> searchCars(@RequestParam String brand) {
-//        List<CarDTO> cars = carService.findCarsByBrand(brand);
-//        return ResponseEntity.ok(cars);
-//    }
+    @GetMapping("/search")
+    public ResponseEntity<List<CarDTO>> searchCars(@RequestParam String brand) {
+        List<CarDTO> cars = carService.findCarsByBrand(brand);
+        return ResponseEntity.ok(cars);
+    }
 
 
     // API to fetch car details by ID
