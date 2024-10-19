@@ -37,7 +37,6 @@ public class CarController {
     }
 
 
-    // API to fetch car details by ID
     @GetMapping("/{carId}")
     public ResponseEntity<Car> getCarById(@PathVariable Long carId) {
         Optional<Car> carDTOOptional = carService.getCarById(carId);
@@ -45,8 +44,8 @@ public class CarController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/similar/{id}")
-    public ResponseEntity<List<Car>> getSimilarCars(@PathVariable int id) {
-        return ResponseEntity.ok(carService.findSimilarCars(id));
+    @GetMapping("/similar/{carId}")
+    public ResponseEntity<List<Car>> getSimilarCars(@PathVariable int carId) {
+        return ResponseEntity.ok(carService.findSimilarCars(carId));
     }
 }
