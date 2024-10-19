@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Car Details</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -27,7 +27,6 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Ensure the carousel and images have fixed dimensions */
         .carousel-item {
             height: 400px; /* Fixed height */
         }
@@ -86,35 +85,32 @@
     </header>
 
     <div class="car-details-section">
-        <!-- Bootstrap carousel for car images -->
-        <div id="carouselContainer" class="carousel slide" data-ride="carousel">
+        <div class="carousel slide" data-ride="carousel" id="carouselContainer">
             <div class="carousel-inner" id="carousel">
-                <!-- Carousel items will be dynamically inserted here -->
+
             </div>
-            <a class="carousel-control-prev" href="#carouselContainer" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <a class="carousel-control-prev" data-slide="prev" href="#carouselContainer" role="button">
+                <span aria-hidden="true" class="carousel-control-prev-icon"></span>
                 <span class="sr-only">Previous</span>
             </a>
-            <a class="carousel-control-next" href="#carouselContainer" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <a class="carousel-control-next" data-slide="next" href="#carouselContainer" role="button">
+                <span aria-hidden="true" class="carousel-control-next-icon"></span>
                 <span class="sr-only">Next</span>
             </a>
         </div>
 
-        <!-- Car details section -->
         <div class="car-info" id="carInfo">
-            <!-- Car details will be dynamically inserted here -->
+
         </div>
     </div>
 
-    <!-- Section to display similar cars -->
     <div class="similar-cars">
         <h2>Similar Cars</h2>
-        <ul id="similarCarsList" class="similar-cars-list">
-            <!-- Similar cars will be dynamically inserted here -->
+        <ul class="similar-cars-list" id="similarCarsList">
+
         </ul>
-        <!-- Compare button -->
-        <button id="compareButton" class="btn btn-primary" style="display: none;" onclick="compareCars()">Compare</button>
+        <button class="btn btn-primary" id="compareButton" onclick="compareCars()" style="display: none;">Compare
+        </button>
     </div>
 </div>
 
@@ -122,34 +118,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="/js/carDetails.js"></script>
-
-<script>
-    // Mock function for car data and interaction
-    let selectedCars = [];
-
-    function toggleCarSelection(carId, element) {
-        if (selectedCars.includes(carId)) {
-            selectedCars = selectedCars.filter(id => id !== carId);
-            element.classList.remove('selected');
-        } else {
-            selectedCars.push(carId);
-            element.classList.add('selected');
-        }
-        document.getElementById('compareButton').style.display = selectedCars.length === 2 ? 'block' : 'none';
-    }
-
-    function compareCars() {
-        alert('Comparing selected cars: ' + selectedCars.join(', '));
-        // Add your compare functionality here
-    }
-
-    // Example of dynamically inserting similar cars
-    document.getElementById('similarCarsList').innerHTML = `
-        <li class="similar-car-item" onclick="toggleCarSelection(1, this)">Car Model A</li>
-        <li class="similar-car-item" onclick="toggleCarSelection(2, this)">Car Model B</li>
-        <li class="similar-car-item" onclick="toggleCarSelection(3, this)">Car Model C</li>
-    `;
-</script>
 
 </body>
 </html>
