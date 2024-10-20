@@ -11,7 +11,7 @@ This is a Java Spring Boot application designed to provide a web-based platform 
 - Spring Boot 3.1.4
 - PostgreSQL
 - Maven
-- 
+  
 ## Prerequisites
 
 - JDK 17 or higher
